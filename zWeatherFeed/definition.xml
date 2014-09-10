@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ExtensionObject Path="zWeatherFeed"
+                 Label="zWeatherFeed" 
+				 Description="Yahoo! Weather Feed Plugin for jQuery" 
+				 PageWidth="0"
+				 PageHeight="0"
+                 Type="Object" >
+   <Text Label="WOEID List" Type="text" Expression="897819,671072,44418,727232,2450080" />
+   <Text Label="Places List" Type="text" Expression="" />
+   <Text Label="Unit" Type="select" Select="f,c" SelectLabel="Fahrenheit,Celsius" Expression="c" />
+   <Text Label="Interval ms" Type="text" Expression="3000" />
+   <Initiate Name="Caption.Show" Value="0" />
+   <Initiate Name="Layout.Border.Use" Value="0" />
+ </ExtensionObject>
