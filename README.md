@@ -4,7 +4,9 @@ QlikView Extensions zWeather Feed
 This extension implements zWeatherFeed Yahoo! Weather Feed Plugin for jQuery: http://www.zazar.net/developers/jquery/zweatherfeed/
 
 ![QlikView Extensions zWeather Feed](screenshot.PNG)
+
 ![QlikView Extensions zWeather Feed](screenshot2.PNG)
+
 ![QlikView Extensions zWeather Feed](properties.PNG)
 
 Properties:
