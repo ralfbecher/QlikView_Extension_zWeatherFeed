@@ -25,9 +25,6 @@ if(!window.console){ window.console = {log: function(){} }; }
 	Qv.LoadExtensionScripts(_files, 
 		function () {
 			Qva.AddExtension(_extension, function(){
-				//Load a CSS style sheet
-				Qva.LoadCSS((_webview ? _path : _pathLong) + "css/" + _extension + ".css");
-
 				var _this = this;
 				var objId = this.Layout.ObjectId.replace("\\", "_");
 
@@ -44,7 +41,16 @@ if(!window.console){ window.console = {log: function(){} }; }
 				//get unit Fahrenheit/Celsius
 				var unit = this.Layout.Text2.text.toString();		
 
+				//get inteval in milliseconds
 				var interval = this.Layout.Text3.text.toString() * 1;
+				
+				//get forecast
+				var forecast = (this.Layout.Text4.text.toString() === '1');
+				if (forecast) {
+					Qva.LoadCSS((_webview ? _path : _pathLong) + "css/" + _extension + "Forecast.css");
+				} else {
+					Qva.LoadCSS((_webview ? _path : _pathLong) + "css/" + _extension + ".css");
+				}
 				
 				var jqXHR = [];
 
@@ -87,30 +93,38 @@ if(!window.console){ window.console = {log: function(){} }; }
 					});				
 					
 				} else {
-					renderIt(_this,objId,woeids,unit,interval);
+					renderIt(_this,objId,woeids,unit,interval,forecast);
 				}
 
 			});
 		});
 
 
-	function renderIt(_this,_objId,_woeids,_unit,_interval) {
+	function renderIt(_this,_objId,_woeids,_unit,_interval,_forecast) {
 		if (_woeids.length > 0) {
+			//console.log(_woeids);
+			if (_forecast) {
+				_woeids = [_woeids[0]];
+				var outerDiv = $('<div />').addClass("weatherFeed").appendTo($(_this.Element).empty());
+				$('<div />').addClass("weatherItem").attr({
+								id: _objId 
+							}).appendTo(outerDiv);
+			} else {
+				var outerDiv = $('<div />').addClass("scrollable vertical").appendTo($(_this.Element).empty());
+				$('<div />').addClass("items").attr({
+								id: _objId 
+							}).appendTo(outerDiv);
+			}
 			var circus = (_woeids.length > 1);
-			console.log(_woeids);
-			var outerDiv = $('<div />').addClass("scrollable vertical").appendTo($(_this.Element).empty());
 			
-			$('<div />').addClass("items").attr({
-							id: _objId 
-						}).appendTo(outerDiv);
-
 			if (circus)
 				$('<div />').addClass("navi").appendTo($(_this.Element));
 			
 			if (_interval > 0 && circus) {
 				$('#'+_objId).weatherfeed(_woeids,{
 						woeid: true,
-						unit: _unit
+						unit: _unit,
+						forecast: _forecast
 					},function(e) {
 					$("div.scrollable").scrollable({ 
 							vertical: true,  
@@ -122,7 +136,8 @@ if(!window.console){ window.console = {log: function(){} }; }
 				if (circus) {
 					$('#'+_objId).weatherfeed(_woeids,{
 							woeid: true,
-							unit: _unit
+							unit: _unit,
+							forecast: _forecast
 						},function(e) {
 						$("div.scrollable").scrollable({ 
 								vertical: true,  
@@ -133,7 +148,8 @@ if(!window.console){ window.console = {log: function(){} }; }
 				} else {
 					$('#'+_objId).weatherfeed(_woeids,{
 							woeid: true,
-							unit: _unit
+							unit: _unit,
+							forecast: _forecast
 						});
 				}
 			}	
