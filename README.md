@@ -10,6 +10,8 @@ This extension implements zWeatherFeed Yahoo! Weather Feed Plugin for jQuery: ht
 ![QlikView Extensions zWeather Feed](properties.PNG)
 
 Properties:
+-----------
+
 1. WOEID List : a list of WOEIDs (Where On Earth IDentifier) to call weather API http://en.wikipedia.org/wiki/GeoPlanet
 2. Places List: a list of places (eg. Barcelona,Istanbul) if you don't have WOEIDs,
                 it will query Yahoo API to obtain WOEIDs and store it in the field above
